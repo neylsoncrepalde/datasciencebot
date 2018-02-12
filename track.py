@@ -7,6 +7,7 @@ Track
 """
 
 from twython import TwythonStreamer, Twython, TwythonError
+from http.client import IncompleteRead
 import time
 from auth import (
     consumer_key,
@@ -43,11 +44,17 @@ class MyStreamer(TwythonStreamer):
                         post.retweet(id = data['id_str'])
                         print('Foi tweetado!')
                         print(time.ctime())
+                        time.sleep(10)
+                    except IncompleteRead as e:
+                        print("Error: IncompleteRead!")
+                        time.sleep(10)
+                        pass
                     except TwythonError as e:
                         print(e)
+                        time.sleep(10)
                     except UnicodeEncodeError as e:
                         print(e)
-                    time.sleep(10)
+                        time.sleep(10)
 
                     
             
@@ -61,5 +68,5 @@ stream = MyStreamer(
 #ids = [344956335,44502932,42399225,22037917] melhor para pós-graduação
 imih = 102445112
 
-keys = ['#rstats']
+keys = ['#rstats', '#datascience']
 stream.statuses.filter(track=keys, follow=imih)
