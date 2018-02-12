@@ -44,7 +44,7 @@ class MyStreamer(TwythonStreamer):
                         post.retweet(id = data['id_str'])
                         print('Foi tweetado!')
                         print(time.ctime())
-                        time.sleep(10)
+                        time.sleep(54000)
                     except IncompleteRead as e:
                         print("Error: IncompleteRead!")
                         time.sleep(10)
