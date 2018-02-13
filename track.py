@@ -7,6 +7,7 @@ Track
 """
 
 from twython import TwythonStreamer, Twython, TwythonError
+from twython import TwythonRateLimitError
 from http.client import IncompleteRead
 import time
 from auth import (
@@ -44,7 +45,8 @@ class MyStreamer(TwythonStreamer):
                         post.retweet(id = data['id_str'])
                         print('Foi tweetado!')
                         print(time.ctime())
-                        time.sleep(54000)
+                        #Espera 10 minutos
+                        time.sleep(600)
                     except IncompleteRead as e:
                         print("Error: IncompleteRead!")
                         time.sleep(10)
@@ -55,6 +57,10 @@ class MyStreamer(TwythonStreamer):
                     except UnicodeEncodeError as e:
                         print(e)
                         time.sleep(10)
+                    except TwythonRateLimitError as e:
+                        print('Error: API limit for the day used!')
+                        # Espera 4 horas
+                        time.sleep(14400)
 
                     
             
