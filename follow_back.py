@@ -18,7 +18,7 @@ twitter = Twython(consumer_key,
 followers = []
 
 def followBack(screen_name):
-    while true:
+    while True:
         try:
             ids = twitter.get_followers_ids(screen_name = screen_name)
             for id in ids:
