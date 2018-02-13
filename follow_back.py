@@ -22,14 +22,14 @@ def followBack(name):
         print('Scanning........')
         try:
             ids = twitter.get_followers_ids(screen_name = name)
-            for id in ids:
-                if id in followers:
+            for guy in ids:
+                if guy in followers:
                     print('Already know this guy...')
                     continue
                 else:
-                    twitter.create_friendship(user_id = id)
+                    twitter.create_friendship(user_id = guy)
                     print('New friendship! Yeah!!!')
-                    followers.append(id)
+                    followers.append(guy)
             
         except TwythonError as e:
             print(e)
