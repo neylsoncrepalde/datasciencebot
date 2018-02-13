@@ -17,11 +17,11 @@ twitter = Twython(consumer_key,
 # Define a static followers list
 followers = []
 
-def followBack(screen_name):
+def followBack(name):
     while True:
         print('Scanning........')
         try:
-            ids = twitter.get_followers_ids(screen_name = screen_name)
+            ids = twitter.get_followers_ids(screen_name = name)
             for id in ids:
                 if id in followers:
                     print('Already know this guy...')
@@ -32,7 +32,7 @@ def followBack(screen_name):
                     followers.append(id)
             
         except TwythonError as e:
-            print('TwythonError. No problem, though...')
+            print(e)
             pass
 
         # Fazer uma vez por dia
@@ -41,4 +41,6 @@ def followBack(screen_name):
         time.sleep(86400)
 
 # Action!
-followBack('datascienceimih')
+my_id = 959576979182948352
+my_screenname = 'datascienceimih'
+followBack(my_screenname)
