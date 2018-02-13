@@ -19,19 +19,25 @@ followers = []
 
 def followBack(screen_name):
     while True:
+        print('Scanning........')
         try:
             ids = twitter.get_followers_ids(screen_name = screen_name)
             for id in ids:
                 if id in followers:
+                    print('Already know this guy...')
                     continue
                 else:
                     twitter.create_friendship(user_id = id)
+                    print('New friendship! Yeah!!!')
                     followers.append(id)
             
         except TwythonError as e:
+            print('TwythonError. No problem, though...')
             pass
 
         # Fazer uma vez por dia
+        print('Sleeping............')
+        print('zzz......')
         time.sleep(86400)
 
 # Action!
